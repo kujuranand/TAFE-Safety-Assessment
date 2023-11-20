@@ -39,6 +39,7 @@ public class InteractionSystem_Helmet : MonoBehaviour
                 if (Helmet != null)
                 {
                     Helmet.SetActive(!Helmet.activeSelf);
+                    InteractionText.SetActive(false); // Hide Interaction Text
                     Debug.Log("Show Helmet");
                 }
             }
@@ -52,7 +53,7 @@ public class InteractionSystem_Helmet : MonoBehaviour
             //Debug.Log("Exited Trigger");
             if (InteractionText != null)
                 {
-                    InteractionText.SetActive(!InteractionText.activeSelf);
+                    InteractionText.SetActive(false); // Hide Interaction Text
                     Debug.Log("Hide Press E");
                 }
         }

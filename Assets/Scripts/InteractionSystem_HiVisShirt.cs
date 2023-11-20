@@ -39,6 +39,7 @@ public class InteractionSystem_HiVisShirt : MonoBehaviour
                 if (HiVisShirt != null)
                 {
                     HiVisShirt.SetActive(!HiVisShirt.activeSelf);
+                    InteractionText.SetActive(false); // Hide Interaction Text
                     Debug.Log("Show HiVisShirt");
                 }
             }
@@ -52,7 +53,7 @@ public class InteractionSystem_HiVisShirt : MonoBehaviour
             //Debug.Log("Exited Trigger");
             if (InteractionText != null)
                 {
-                    InteractionText.SetActive(!InteractionText.activeSelf);
+                    InteractionText.SetActive(false); // Hide Interaction Text
                     Debug.Log("Hide Press E");
                 }
         }

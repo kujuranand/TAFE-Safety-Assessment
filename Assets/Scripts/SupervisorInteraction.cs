@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class SupervisorInteraction : MonoBehaviour
 {
     public GameObject InteractionText;
+    public GameObject SupervisorText;
     public Animator animator;
 
     private void Start()
@@ -25,6 +26,7 @@ public class SupervisorInteraction : MonoBehaviour
             if (InteractionText != null)
                 {
                     InteractionText.SetActive(!InteractionText.activeSelf);
+                    SupervisorText.SetActive(false);
                     Debug.Log("Show Press E");
                 }
         }
@@ -40,6 +42,8 @@ public class SupervisorInteraction : MonoBehaviour
                 if (animator != null)
                 {
                     animator.SetTrigger("Talk");
+                    InteractionText.SetActive(false); // Hide Interaction Text
+                    SupervisorText.SetActive(true);
                 }
                 else
                 {
@@ -56,7 +60,8 @@ public class SupervisorInteraction : MonoBehaviour
             //Debug.Log("Exited Trigger");
             if (InteractionText != null)
                 {
-                    InteractionText.SetActive(!InteractionText.activeSelf);
+                    InteractionText.SetActive(false); // Hide Interaction Text
+                    SupervisorText.SetActive(false);
                     Debug.Log("Hide Press E");
                 }
         }

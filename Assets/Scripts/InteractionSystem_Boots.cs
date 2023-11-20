@@ -39,6 +39,7 @@ public class InteractionSystem_Boots : MonoBehaviour
                 if (Boots != null)
                 {
                     Boots.SetActive(!Boots.activeSelf);
+                    InteractionText.SetActive(false); // Hide Interaction Text
                     Debug.Log("Show Boots");
                 }
             }
@@ -52,7 +53,7 @@ public class InteractionSystem_Boots : MonoBehaviour
             //Debug.Log("Exited Trigger");
             if (InteractionText != null)
                 {
-                    InteractionText.SetActive(!InteractionText.activeSelf);
+                    InteractionText.SetActive(false); // Hide Interaction Text
                     Debug.Log("Hide Press E");
                 }
         }
