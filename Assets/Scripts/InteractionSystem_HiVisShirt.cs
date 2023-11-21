@@ -9,8 +9,31 @@ public class InteractionSystem_HiVisShirt : MonoBehaviour
     public GameObject Shirt;
     public GameObject HiVisShirt;
     public GameObject InteractionText;
+    public AudioSource hiVisShirtAudioSource;
 
     private bool playerInsideTrigger = false;
+
+    private void Start()
+    {
+        // Attempt to get the AudioSource component
+        if (HiVisShirt != null)
+        {
+            hiVisShirtAudioSource = HiVisShirt.GetComponent<AudioSource>();
+
+            if (hiVisShirtAudioSource != null)
+            {
+                Debug.Log("AudioSource found on HiVisShirt GameObject.");
+            }
+            else
+            {
+                Debug.LogError("AudioSource component not found on HiVisShirt GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("HiVisShirt GameObject not assigned.");
+        }
+    }
 
     private void Update()
     {
@@ -33,6 +56,12 @@ public class InteractionSystem_HiVisShirt : MonoBehaviour
         if (HiVisShirt != null)
         {
             HiVisShirt.SetActive(!HiVisShirt.activeSelf);
+
+            if (hiVisShirtAudioSource != null)
+            {
+                hiVisShirtAudioSource.Play(); // Play the audio
+            }
+
             if (InteractionText != null)
             {
                 InteractionText.SetActive(false); // Hide Interaction Text

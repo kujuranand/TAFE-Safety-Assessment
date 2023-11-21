@@ -8,8 +8,31 @@ public class InteractionSystem_Boots : MonoBehaviour
     public GameObject Thongs;
     public GameObject Boots;
     public GameObject InteractionText;
+    public AudioSource bootsAudioSource;
 
     private bool playerInsideTrigger = false;
+
+    private void Start()
+    {
+        // Attempt to get the AudioSource component
+        if (Boots != null)
+        {
+            bootsAudioSource = Boots.GetComponent<AudioSource>();
+
+            if (bootsAudioSource != null)
+            {
+                Debug.Log("AudioSource found on Boots GameObject.");
+            }
+            else
+            {
+                Debug.LogError("AudioSource component not found on Boots GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Boots GameObject not assigned.");
+        }
+    }
 
     private void Update()
     {
@@ -32,6 +55,12 @@ public class InteractionSystem_Boots : MonoBehaviour
         if (Boots != null)
         {
             Boots.SetActive(!Boots.activeSelf);
+
+            if (bootsAudioSource != null)
+            {
+                bootsAudioSource.Play(); // Play the audio
+            }
+
             if (InteractionText != null)
             {
                 InteractionText.SetActive(false); // Hide Interaction Text

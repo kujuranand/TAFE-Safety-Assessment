@@ -8,8 +8,31 @@ public class InteractionSystem_Helmet : MonoBehaviour
     public GameObject Cap;
     public GameObject Helmet;
     public GameObject InteractionText;
+    public AudioSource helmetAudioSource;
 
     private bool playerInsideTrigger = false;
+
+    private void Start()
+    {
+        // Attempt to get the AudioSource component
+        if (Helmet != null)
+        {
+            helmetAudioSource = Helmet.GetComponent<AudioSource>();
+
+            if (helmetAudioSource != null)
+            {
+                Debug.Log("AudioSource found on Helmet GameObject.");
+            }
+            else
+            {
+                Debug.LogError("AudioSource component not found on Helmet GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Helmet GameObject not assigned.");
+        }
+    }
 
     private void Update()
     {
@@ -32,6 +55,12 @@ public class InteractionSystem_Helmet : MonoBehaviour
         if (Helmet != null)
         {
             Helmet.SetActive(!Helmet.activeSelf);
+
+            if (helmetAudioSource != null)
+            {
+                helmetAudioSource.Play(); // Play the audio
+            }
+
             if (InteractionText != null)
             {
                 InteractionText.SetActive(false); // Hide Interaction Text
