@@ -5,15 +5,47 @@ using UnityEngine.InputSystem;
 
 public class InteractionSystem_Helmet : MonoBehaviour
 {
-
     public GameObject Cap;
     public GameObject Helmet;
     public GameObject InteractionText;
+
+    private bool playerInsideTrigger = false;
+
+    private void Update()
+    {
+        // Check for key press in the Update method
+        if (playerInsideTrigger && Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            OnEKeyPressed();
+        }
+    }
+
+    private void OnEKeyPressed()
+    {
+        // Handle the logic when "E" key is pressed
+        if (Cap != null)
+        {
+            Cap.SetActive(!Cap.activeSelf);
+            Debug.Log("Hide Cap");
+        }
+
+        if (Helmet != null)
+        {
+            Helmet.SetActive(!Helmet.activeSelf);
+            if (InteractionText != null)
+            {
+                InteractionText.SetActive(false); // Hide Interaction Text
+                Debug.Log("Show Helmet");
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            playerInsideTrigger = true;
+
             //Debug.Log("Entered Trigger");
             if (InteractionText != null)
                 {
@@ -23,33 +55,35 @@ public class InteractionSystem_Helmet : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            //Debug.Log("Staying in Trigger");
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-            {
-                if (Cap != null)
-                {
-                    Cap.SetActive(!Cap.activeSelf);
-                    Debug.Log("Hide Cap");
-                }
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         //Debug.Log("Staying in Trigger");
+    //         if (Keyboard.current.eKey.wasPressedThisFrame)
+    //         {
+    //             if (Cap != null)
+    //             {
+    //                 Cap.SetActive(!Cap.activeSelf);
+    //                 Debug.Log("Hide Cap");
+    //             }
                 
-                if (Helmet != null)
-                {
-                    Helmet.SetActive(!Helmet.activeSelf);
-                    InteractionText.SetActive(false); // Hide Interaction Text
-                    Debug.Log("Show Helmet");
-                }
-            }
-        }
-    }
+    //             if (Helmet != null)
+    //             {
+    //                 Helmet.SetActive(!Helmet.activeSelf);
+    //                 InteractionText.SetActive(false); // Hide Interaction Text
+    //                 Debug.Log("Show Helmet");
+    //             }
+    //         }
+    //     }
+    // }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            playerInsideTrigger = false;
+            
             //Debug.Log("Exited Trigger");
             if (InteractionText != null)
                 {
