@@ -11,6 +11,7 @@ public class SupervisorInteraction : MonoBehaviour
     public GameObject HardHat;
     public GameObject HiVisShirt;
     public GameObject SafetyBoots;
+    public GameObject Phone;
     public Animator animator;
 
     private bool playerInsideTrigger = false;
@@ -20,7 +21,17 @@ public class SupervisorInteraction : MonoBehaviour
         // Ensure that the Animator component is assigned in the Unity Editor
         if (animator == null)
         {
-            Debug.LogError("Animator is not assigned to the script. Assign it in the Unity Editor.");
+            Debug.LogError("Animator is not assigned to the script.");
+        }
+
+        // Ensure that the Phone game object is initially inactive
+        if (Phone != null)
+        {
+            Phone.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Phone game object is not assigned to the script.");
         }
     }
 
@@ -31,14 +42,24 @@ public class SupervisorInteraction : MonoBehaviour
         {
             OnEKeyPressed();
         }
+
+        // Check if the phone call animation is playing
+        if (IsPhoneCallAnimationPlaying())
+        {
+            Phone.SetActive(true); // Activate the phone game object
+        }
+        else
+        {
+            Phone.SetActive(false); // Deactivate the phone game object
+        }
     }
 
     private void OnEKeyPressed()
     {
         // Check if all three PPEs are active
         bool areObjectsVisible = HardHat != null && HardHat.activeSelf && 
-                                    HiVisShirt != null && HiVisShirt.activeSelf && 
-                                    SafetyBoots != null && SafetyBoots.activeSelf;
+                                 HiVisShirt != null && HiVisShirt.activeSelf && 
+                                 SafetyBoots != null && SafetyBoots.activeSelf;
 
         if (animator != null)
             {
@@ -62,10 +83,17 @@ public class SupervisorInteraction : MonoBehaviour
                     Debug.Log("One or more PPE is missing. Put on the PPE.");
                 }
             }
-            else
-            {
-                Debug.LogError("Animator is null. Assign it in Unity Editor");
-            }
+        else
+        {
+            Debug.LogError("Animator is null.");
+        }
+    }
+
+    // Method to check if the phone call animation is playing
+    private bool IsPhoneCallAnimationPlaying()
+    {
+        // phone call animation
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("PhoneCall");
     }
 
     private void OnTriggerEnter(Collider other)
