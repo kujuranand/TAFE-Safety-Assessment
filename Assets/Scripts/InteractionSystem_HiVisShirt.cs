@@ -8,6 +8,8 @@ public class InteractionSystem_HiVisShirt : MonoBehaviour
 
     public GameObject Shirt;
     public GameObject HiVisShirt;
+    public GameObject Pant;
+    public GameObject WorkerPant;
     public GameObject InteractionText;
     public AudioSource hiVisShirtAudioSource;
 
@@ -61,6 +63,23 @@ public class InteractionSystem_HiVisShirt : MonoBehaviour
             {
                 hiVisShirtAudioSource.Play(); // Play the audio
             }
+
+            if (InteractionText != null)
+            {
+                InteractionText.SetActive(false); // Hide Interaction Text
+                Debug.Log("Show HiVisShirt");
+            }
+        }
+
+        if (Pant != null)
+        {
+            Pant.SetActive(!Pant.activeSelf);
+            Debug.Log("Hide Pant");
+        }
+
+        if (WorkerPant != null)
+        {
+            WorkerPant.SetActive(!WorkerPant.activeSelf);
 
             if (InteractionText != null)
             {

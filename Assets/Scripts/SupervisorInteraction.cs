@@ -8,6 +8,7 @@ public class SupervisorInteraction : MonoBehaviour
     public GameObject InteractionText;
     public GameObject SupervisorText1;
     public GameObject SupervisorText2;
+    public GameObject SupervisorText3;
     public GameObject HardHat;
     public GameObject HiVisShirt;
     public GameObject SafetyBoots;
@@ -56,33 +57,36 @@ public class SupervisorInteraction : MonoBehaviour
 
     private void OnEKeyPressed()
     {
-        // Check if all three PPEs are active
-        bool areObjectsVisible = HardHat != null && HardHat.activeSelf && 
-                                 HiVisShirt != null && HiVisShirt.activeSelf && 
-                                 SafetyBoots != null && SafetyBoots.activeSelf;
+        // Check if each PPE is active
+        bool isHardHatActive = HardHat != null && HardHat.activeSelf;
+        bool isHiVisShirtActive = HiVisShirt != null && HiVisShirt.activeSelf;
+        bool isSafetyBootsActive = SafetyBoots != null && SafetyBoots.activeSelf;
+
+        // Determine the number of active PPEs
+        int activePPECount = (isHardHatActive ? 1 : 0) + 
+                             (isHiVisShirtActive ? 1 : 0) + 
+                             (isSafetyBootsActive ? 1 : 0);
 
         if (animator != null)
+        {
+            InteractionText.SetActive(false); // Hide Interaction Text
+
+            animator.SetTrigger("Talk1"); // Set trigger
+            Debug.Log("First Trigger");
+
+            // Control the visibility of SupervisorText1, SupervisorText2, and SupervisorText3 based on the number of active PPEs
+            SupervisorText1.SetActive(activePPECount == 0);
+            SupervisorText2.SetActive(activePPECount == 1 || activePPECount == 2);
+            SupervisorText3.SetActive(activePPECount == 3);
+
+            if (activePPECount == 3)
             {
-                InteractionText.SetActive(false); // Hide Interaction Text
-
-                animator.SetTrigger("Talk1"); // Set trigger
-                Debug.Log("First Trigger");
-
-                if (areObjectsVisible)
-                {
-                    animator.SetTrigger("Talk2"); // Set trigger only if all PPEs are active
-                    SupervisorText2.SetActive(true); // All three PPEs are visible
-                    SupervisorText1.SetActive(false); // Hide SupervisorText1
-                    Debug.Log("All PPE active.");
-                    Debug.Log("Second Trigger");
-                }
-                else
-                {
-                    SupervisorText1.SetActive(true); // One or more PPEs are not visible
-                    SupervisorText2.SetActive(false); // Hide SupervisorText2
-                    Debug.Log("One or more PPE is missing. Put on the PPE.");
-                }
+                animator.SetTrigger("Talk2"); // Set "Talk2" trigger if all three PPEs are active
+                Debug.Log("Talk2 Trigger");
             }
+
+            Debug.Log($"Active PPE Count: {activePPECount}");
+        }
         else
         {
             Debug.LogError("Animator is null.");
@@ -105,8 +109,10 @@ public class SupervisorInteraction : MonoBehaviour
             //Debug.Log("Entered Trigger");
             if (InteractionText != null)
                 {
-                    InteractionText.SetActive(!InteractionText.activeSelf);
+                    InteractionText.SetActive(true);
                     SupervisorText1.SetActive(false);
+                    SupervisorText2.SetActive(false);
+                    SupervisorText3.SetActive(false);
                     Debug.Log("Show Press E");
                 }
         }
@@ -166,6 +172,7 @@ public class SupervisorInteraction : MonoBehaviour
                     InteractionText.SetActive(false); // Hide Interaction Text
                     SupervisorText1.SetActive(false);
                     SupervisorText2.SetActive(false);
+                    SupervisorText3.SetActive(false);
                     Debug.Log("Hide Press E");
                 }
         }
