@@ -12,6 +12,10 @@ public class DoorInteraction : MonoBehaviour
     public GameObject HiVisShirt;
     public GameObject SafetyBoots;
 
+    public AudioSource doorOpenAudio;
+    public AudioSource doorLockedAudio;
+    public AudioSource doorCloseAudio;
+
     private bool playerInsideTrigger = false;
 
     private void Start()
@@ -20,6 +24,12 @@ public class DoorInteraction : MonoBehaviour
         if (animator == null)
         {
             Debug.LogError("Animator is not assigned to the script.");
+        }
+
+        // Ensure that AudioSource components are assigned in the Unity Editor
+        if (doorOpenAudio == null || doorLockedAudio == null || doorCloseAudio == null)
+        {
+            Debug.LogError("One or more AudioSource components are not assigned to the script.");
         }
     }
 
@@ -44,11 +54,15 @@ public class DoorInteraction : MonoBehaviour
                 InteractionText.SetActive(false); // Hide Interaction Text
                 DoorLockedText.SetActive(true); // Show Door Locked Text
 
+                PlayDoorAudio(doorLockedAudio); // Play door locked audio
+
                 if (areObjectsVisible)
                 {
                     animator.SetTrigger("doorOpen"); // Set door open trigger
                     DoorLockedText.SetActive(false); // Hide Door Locked Text
                     Debug.Log("Open Door.");
+
+                    PlayDoorAudio(doorOpenAudio); // Play door opening audio
 
                     Invoke("CloseDoor", 5f); // Schedule the doorClose Trigger after 5 seconds
                 }
@@ -66,11 +80,33 @@ public class DoorInteraction : MonoBehaviour
         {
             animator.SetTrigger("doorClose"); // Set door close trigger
             Debug.Log("Close Door.");
+
+            // Schedule playing door closing audio with a 1-second delay
+            Invoke("PlayDoorClosingAudio", 0.75f);
         }
 
         else
         {
             Debug.LogError("Animator is null.");
+        }
+    }
+
+    // Play the door closing audio
+    private void PlayDoorClosingAudio()
+    {
+        PlayDoorAudio(doorCloseAudio); // Play door closing audio
+    }
+
+    // Play the corresponding audio clip based on the provided AudioSource
+    private void PlayDoorAudio(AudioSource audioSource)
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogError("AudioSource is null.");
         }
     }
 
