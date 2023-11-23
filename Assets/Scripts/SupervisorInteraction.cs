@@ -9,6 +9,7 @@ public class SupervisorInteraction : MonoBehaviour
     public GameObject SupervisorText1;
     public GameObject SupervisorText2;
     public GameObject SupervisorText3;
+    public GameObject Label;
     public GameObject HardHat;
     public GameObject HiVisShirt;
     public GameObject SafetyBoots;
@@ -113,6 +114,7 @@ public class SupervisorInteraction : MonoBehaviour
                     SupervisorText1.SetActive(false);
                     SupervisorText2.SetActive(false);
                     SupervisorText3.SetActive(false);
+                    Label.SetActive(false);
                     Debug.Log("Show Press E");
                 }
         }
@@ -173,6 +175,7 @@ public class SupervisorInteraction : MonoBehaviour
                     SupervisorText1.SetActive(false);
                     SupervisorText2.SetActive(false);
                     SupervisorText3.SetActive(false);
+                    Label.SetActive(true);
                     Debug.Log("Hide Press E");
                 }
         }
