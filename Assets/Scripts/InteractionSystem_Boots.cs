@@ -121,5 +121,4 @@ public class InteractionSystem_Boots : MonoBehaviour
                 }
         }
     }
-
 }
