@@ -12462,7 +12462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 239859422}
   - component: {fileID: 239859421}
-  - component: {fileID: 239859423}
+  - component: {fileID: 239859424}
   m_Layer: 0
   m_Name: Hi Vis Shirt
   m_TagString: Untagged
@@ -12499,7 +12499,7 @@ Transform:
   m_Father: {fileID: 1978918775}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &239859423
+--- !u!114 &239859424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12508,15 +12508,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 239859419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84923e3c009457744ad98b0bd09bc52d, type: 3}
+  m_Script: {fileID: 11500000, guid: da8a861602d0009439a9be6adbe82cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shirt: {fileID: 2013612931}
-  HiVisShirt: {fileID: 1358496516}
-  Pant: {fileID: 2013612973}
-  WorkerPant: {fileID: 478317261}
+  objectToHide: {fileID: 2013612931}
+  objectToShow: {fileID: 1358496516}
   InteractionText: {fileID: 1238710305}
-  hiVisShirtAudioSource: {fileID: 406928190}
+  pickUpAudioSource: {fileID: 1358496519}
 --- !u!1001 &242232471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26198,7 +26196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 898439399}
   - component: {fileID: 898439398}
-  - component: {fileID: 898439400}
+  - component: {fileID: 898439401}
   m_Layer: 0
   m_Name: Safety Boots
   m_TagString: Untagged
@@ -26235,7 +26233,7 @@ Transform:
   m_Father: {fileID: 1978918775}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &898439400
+--- !u!114 &898439401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26244,13 +26242,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 898439396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4387b232fdf5c04ab55541f5bf87dce, type: 3}
+  m_Script: {fileID: 11500000, guid: da8a861602d0009439a9be6adbe82cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thongs: {fileID: 2013612929}
-  Boots: {fileID: 406928187}
+  objectToHide: {fileID: 2013612929}
+  objectToShow: {fileID: 406928187}
   InteractionText: {fileID: 1238710305}
-  bootsAudioSource: {fileID: 406928190}
+  pickUpAudioSource: {fileID: 406928190}
 --- !u!114 &898950545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31456,7 +31454,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f3d17836a87ae942ac524d7020ac829, type: 2}
+  - {fileID: 2100000, guid: eb8ff3f44bcb9dc46abdf29cd50dd9c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35950,7 +35948,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f3d17836a87ae942ac524d7020ac829, type: 2}
+  - {fileID: 2100000, guid: eb8ff3f44bcb9dc46abdf29cd50dd9c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -36692,7 +36690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698729283}
   - component: {fileID: 1698729282}
-  - component: {fileID: 1698729281}
+  - component: {fileID: 1698729284}
   m_Layer: 0
   m_Name: Hard Hat
   m_TagString: Untagged
@@ -36700,22 +36698,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1698729281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698729280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05087d0c175981d4698db42428117559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cap: {fileID: 2013611135}
-  Helmet: {fileID: 2013612983}
-  InteractionText: {fileID: 1238710305}
-  helmetAudioSource: {fileID: 2027274350}
 --- !u!65 &1698729282
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36745,6 +36727,22 @@ Transform:
   m_Father: {fileID: 1978918775}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1698729284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698729280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8a861602d0009439a9be6adbe82cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToHide: {fileID: 2013611135}
+  objectToShow: {fileID: 2013612983}
+  InteractionText: {fileID: 1238710305}
+  pickUpAudioSource: {fileID: 2027274350}
 --- !u!4 &1701263018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae97f061cd976ff42a79a87b6eedc27f,
