@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class ObjectInteractionSystem : MonoBehaviour
 {
     public GameObject objectToHide; // clothing
     public GameObject objectToShow; // PPE
     
-    public GameObject InteractionText;
-    
     public AudioSource pickUpAudioSource;
+
+    public string customInteractionText = "Custom interaction Text"; // Set custom text
+    public LogDisplay logDisplay; // Reference to the LogDisplay script
 
     private bool playerInsideTrigger = false;
 
@@ -54,11 +56,14 @@ public class ObjectInteractionSystem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInsideTrigger = true;
+            
+            
 
-            if (InteractionText != null)
+            if (customInteractionText != null)
                 {
-                    InteractionText.SetActive(true);
-                    Debug.Log("Show - Press E");
+                // Show log message on the display
+                logDisplay.ShowLog(customInteractionText);
+                Debug.Log(customInteractionText);
                 }
             else
             {
@@ -77,17 +82,18 @@ public class ObjectInteractionSystem : MonoBehaviour
         {
             playerInsideTrigger = false;
 
-            if (InteractionText != null)
-                {
-                    InteractionText.SetActive(false); // Hide Interaction Text
-                    Debug.Log("Hide - Press E");
-                }
+            if (customInteractionText != null)
+            {
+                logDisplay.HideLog();
+            }
         }
     }
 
     private void OnEKeyPressed()
     {
-        putOnPPE();
+        Invoke("putOnPPE", 0.8f); // Delay 1 second
+        
+        Invoke("DestroyObject", 0.8f); // Delay destroy object by 1 second
     }
 
     private void putOnPPE()
@@ -111,11 +117,16 @@ public class ObjectInteractionSystem : MonoBehaviour
                 pickUpAudioSource.Play(); // Play the audio
             }
 
-            if (InteractionText != null)
+            if (customInteractionText != null)
             {
-                InteractionText.SetActive(false); // Hide Interaction Text
-                Debug.Log("Show PPE");
+                logDisplay.HideLog();
             }
         }
+    }
+
+    private void DestroyObject()
+    {
+        // Destroy the object
+        Destroy(gameObject);
     }    
 }
