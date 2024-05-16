@@ -739,6 +739,66 @@ MonoBehaviour:
     yOffset: 0
     mats:
     - {fileID: 2100000, guid: 3f3d17836a87ae942ac524d7020ac829, type: 2}
+  - name: Hat Pack 1
+    mesh:
+    - {fileID: -7172132604021789278, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: 2508773403997952536, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -4977275589484261445, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -5902935990420064114, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    hideParts:
+    - Hair
+    yOffset: 0
+    mats:
+    - {fileID: 2100000, guid: d930fe5e417be994b80ab0a965baa312, type: 2}
+    - {fileID: 2100000, guid: e58fb7eb8426b3542a02de7b75e63f4d, type: 2}
+  - name: Hat Pack 2
+    mesh:
+    - {fileID: 2289792933840742441, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -2025410232198108019, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -4351761370076957387, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -980730289963912189, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    hideParts:
+    - Hair
+    yOffset: 0
+    mats:
+    - {fileID: 2100000, guid: d930fe5e417be994b80ab0a965baa312, type: 2}
+    - {fileID: 2100000, guid: e58fb7eb8426b3542a02de7b75e63f4d, type: 2}
+  - name: Hat Pack 3
+    mesh:
+    - {fileID: 9191791098241031187, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -5023921222188994901, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -2959693041546971793, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -4371781933868935512, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    hideParts:
+    - Hair
+    yOffset: 0
+    mats:
+    - {fileID: 2100000, guid: d930fe5e417be994b80ab0a965baa312, type: 2}
+    - {fileID: 2100000, guid: e58fb7eb8426b3542a02de7b75e63f4d, type: 2}
+  - name: Hat Pack 4
+    mesh:
+    - {fileID: 7122826971669276086, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -6332499665256293878, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: 8797361453495030636, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: 6758208002879553833, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    hideParts:
+    - Hair
+    yOffset: 0
+    mats:
+    - {fileID: 2100000, guid: d930fe5e417be994b80ab0a965baa312, type: 2}
+    - {fileID: 2100000, guid: e58fb7eb8426b3542a02de7b75e63f4d, type: 2}
+  - name: Hat Pack 5
+    mesh:
+    - {fileID: -4872758063054208086, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -8446975953237734287, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: 2382038983725662934, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    - {fileID: -7981672551066473947, guid: a4c73dfa5cbc4a0439122e6527d07c5e, type: 3}
+    hideParts:
+    - Hair
+    yOffset: 0
+    mats:
+    - {fileID: 2100000, guid: d930fe5e417be994b80ab0a965baa312, type: 2}
+    - {fileID: 2100000, guid: e58fb7eb8426b3542a02de7b75e63f4d, type: 2}
   accessoryPresets:
   - name: Accessory Type 1
     mesh:

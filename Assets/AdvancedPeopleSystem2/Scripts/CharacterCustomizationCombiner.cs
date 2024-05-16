@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace AdvancedPeopleSystem
 {
@@ -218,20 +219,23 @@ namespace AdvancedPeopleSystem
                         {
                             meshInstance.combined_vertices.AddRange(combineInstance.instance.mesh.vertices);
 
-                            if (combineInstance.instance.mesh.uv.Length == 0)
+                            var uv = combineInstance.instance.mesh.uv;
+                            if (uv.Length == 0)
                                 meshInstance.combined_uv.AddRange(new Vector2[combineInstance.instance.mesh.vertexCount]);
                             else
-                                meshInstance.combined_uv.AddRange(combineInstance.instance.mesh.uv);
+                                meshInstance.combined_uv.AddRange(uv);
 
-                            if (combineInstance.instance.mesh.uv2.Length == 0)
+                            var uv2 = combineInstance.instance.mesh.uv2;
+                            if (uv2.Length == 0)
                                 meshInstance.combined_uv2.AddRange(new Vector2[combineInstance.instance.mesh.vertexCount]);
                             else
-                                meshInstance.combined_uv2.AddRange(combineInstance.instance.mesh.uv2);
+                                meshInstance.combined_uv2.AddRange(uv2);
 
-                            if (combineInstance.instance.mesh.uv3.Length == 0)
+                            var uv3 = combineInstance.instance.mesh.uv3;
+                            if (uv3.Length == 0)
                                 meshInstance.combined_uv3.AddRange(new Vector2[combineInstance.instance.mesh.vertexCount]);
                             else
-                                meshInstance.combined_uv3.AddRange(combineInstance.instance.mesh.uv3);
+                                meshInstance.combined_uv3.AddRange(uv3);
 
                             meshInstance.normals.AddRange(combineInstance.instance.mesh.normals);
 
@@ -268,58 +272,45 @@ namespace AdvancedPeopleSystem
                 }
 
                 //Bake Blendshapes
+                
                 if (bakeBlendshapes)
                 {
-                    int offset;
-                    try
+                    var offset = 0;
+                  
+                    foreach (var combine in meshInstance.combine_instances.SelectMany(pair => pair.Value).Where(c => c.instance.subMeshIndex == 0))
                     {
+
+                        if (combine.instance.subMeshIndex > 0)
+                            continue;
+
+                        var vcount = combine.instance.mesh.vertexCount;
+
+                        var deltaVerts = new Vector3[vcount];
+                        var deltaNormals = new Vector3[vcount];
                         for (int bs = 0; bs < meshInstance.blendShapeNames.Count; bs++)
                         {
-                            offset = 0;
+                            var bsIndex = combine.instance.mesh.GetBlendShapeIndex(meshInstance.blendShapeNames[bs]);
 
-                            BlendWeightData combWeights = new BlendWeightData();
-                            combWeights.deltaNormals = new Vector3[meshInstance.combined_vertices.Count];
-                            combWeights.deltaVerts = new Vector3[meshInstance.combined_vertices.Count];
+                            if (bsIndex == -1) continue;
 
-                            foreach (KeyValuePair<Material, List<CombineInstanceWithSM>> combine_instance in meshInstance.combine_instances)
+                            var bsFrameindex = combine.instance.mesh.GetBlendShapeFrameCount(bsIndex) - 1;
+                            combine.instance.mesh.GetBlendShapeFrameVertices(bsIndex, bsFrameindex, deltaVerts, deltaNormals, null);
+
+                            var bsWeight = meshInstance.blendShapeValues[bs] / 100f;
+                            for (var vi = 0; vi < vcount; vi++)
                             {
-                                foreach (CombineInstanceWithSM combine in combine_instance.Value)
-                                {
-                                    if (combine.instance.subMeshIndex > 0)
-                                        continue;
-
-                                    int vcount = combine.instance.mesh.vertexCount;
-
-                                    Vector3[] deltaVerts = new Vector3[vcount];
-                                    Vector3[] deltaNormals = new Vector3[vcount];
-
-                                    //If this mesh has data, pack that. Otherwise the deltas will be zero, and those will be packed
-                                    int bi = combine.instance.mesh.GetBlendShapeIndex(meshInstance.blendShapeNames[bs]);
-                                    if (bi != -1)
-                                    {
-                                        int index = combine.instance.mesh.GetBlendShapeIndex(meshInstance.blendShapeNames[bs]);
-                                        combine.instance.mesh.GetBlendShapeFrameVertices(index, combine.instance.mesh.GetBlendShapeFrameCount(index) - 1, deltaVerts, deltaNormals, null);
-
-                                        System.Array.Copy(deltaVerts, 0, combWeights.deltaVerts, offset, vcount);
-                                        System.Array.Copy(deltaNormals, 0, combWeights.deltaNormals, offset, vcount);
-                                    }
-                                    offset += vcount;
-                                }
-                            }
-                            if (meshInstance.blendShapeValues[bs] != 0)
-                            {
-                                for (int vi = 0; vi < meshInstance.combined_vertices.Count; vi++)
-                                {
-                                    meshInstance.combined_vertices[vi] += combWeights.deltaVerts[vi] * (meshInstance.blendShapeValues[bs] / 100f);
-                                    meshInstance.normals[vi] += combWeights.deltaNormals[vi] * (meshInstance.blendShapeValues[bs] / 100f);
-                                }
+                                var combinedIndex = offset + vi;
+                                meshInstance.combined_vertices[combinedIndex] += deltaVerts[vi] * bsWeight;
+                                meshInstance.normals[combinedIndex] += deltaNormals[vi] * bsWeight;
                             }
 
                         }
 
-                    }
-                    catch (Exception ex) { Debug.LogError(ex); }
+                        offset += vcount;
+
+                    }                   
                 }
+
                 meshInstance.combined_new_mesh.vertices = meshInstance.combined_vertices.ToArray();
 
                 meshInstance.combined_new_mesh.uv = meshInstance.combined_uv.ToArray();

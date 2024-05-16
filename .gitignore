@@ -70,3 +70,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+FirebaseCppApp-11_9_0.bundle
+FirebaseCppApp-11_9_0.so
+data.unity3d

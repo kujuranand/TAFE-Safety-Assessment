@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "345958788250",
+    "firebase_url": "https://test-01-475b5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "test-01-475b5",
+    "storage_bucket": "test-01-475b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345958788250:android:475dfb46ab6f9483d88323",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.TAFE"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345958788250-3c2k2vv8egjlnoej3usn1cujo93kjeq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfuPMQVmyMuyFZ8K_9laOvhuci0EjxY8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345958788250-3c2k2vv8egjlnoej3usn1cujo93kjeq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

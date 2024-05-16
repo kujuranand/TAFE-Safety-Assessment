@@ -110,8 +110,8 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
-        private bool objectInsideTrigger = false; // Anand - check object is inside player trigger
-        private bool pickObject = false; // Anand
+        // private bool objectInsideTrigger = false; // Anand - check object is inside player trigger
+        // private bool pickObject = false; // Anand
 
         private bool IsCurrentDeviceMouse
         {
@@ -163,49 +163,49 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-            // Anand - Check for key press in the Update method
-            if (objectInsideTrigger && Keyboard.current.eKey.wasPressedThisFrame)
-            {
-                OnEKeyPressed();
-            }
+            // // Anand - Check for key press in the Update method
+            // if (objectInsideTrigger && Keyboard.current.eKey.wasPressedThisFrame)
+            // {
+            //     OnEKeyPressed();
+            // }
         }
 
-        // Anand 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Interact"))
-            {
-                objectInsideTrigger = true;
-            }
-        }
+        // // Anand 
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     if (other.CompareTag("Interact"))
+        //     {
+        //         objectInsideTrigger = true;
+        //     }
+        // }
 
-        // Anand 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Interact"))
-            {
-                objectInsideTrigger = false;
-            }
-        }
+        // // Anand 
+        // private void OnTriggerExit(Collider other)
+        // {
+        //     if (other.CompareTag("Interact"))
+        //     {
+        //         objectInsideTrigger = false;
+        //     }
+        // }
 
-        // Anand - when E key is released - run PickObject method
-        private void OnEKeyPressed()
-        {
-            if (objectInsideTrigger && !pickObject)
-            {
-                PickObject();
-            }
-        }
+        // // Anand - when E key is released - run PickObject method
+        // private void OnEKeyPressed()
+        // {
+        //     if (objectInsideTrigger && !pickObject)
+        //     {
+        //         PickObject();
+        //     }
+        // }
 
-        // Anand - set animator trigger to pick object
-        private void PickObject()
-        {
-            if (objectInsideTrigger)
-            {
-                _animator.SetTrigger("PickObject");
-                pickObject = false;
-            }
-        }
+        // // Anand - set animator trigger to pick object
+        // private void PickObject()
+        // {
+        //     if (objectInsideTrigger)
+        //     {
+        //         _animator.SetTrigger("PickObject");
+        //         pickObject = false;
+        //     }
+        // }
 
         private void LateUpdate()
         {

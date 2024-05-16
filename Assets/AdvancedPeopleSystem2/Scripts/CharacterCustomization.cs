@@ -563,15 +563,9 @@ namespace AdvancedPeopleSystem
                         {
                             if (skinnedMesh != null && skinnedMesh.sharedMesh != null)
                             {
-                                for (var i = 0; i < skinnedMesh.sharedMesh.blendShapeCount; i++)
-                                {                                   
-                                    if (typeName == skinnedMesh.sharedMesh.GetBlendShapeName(i))
-                                    {
-                                        var bIndex = skinnedMesh.sharedMesh.GetBlendShapeIndex(typeName);
-                                        if(bIndex != -1 && !Settings.DisableBlendshapeModifier)
-                                            skinnedMesh.SetBlendShapeWeight(bIndex, weight);
-                                    }
-                                }
+                                var bIndex = skinnedMesh.sharedMesh.GetBlendShapeIndex(typeName);
+                                if (bIndex != -1 && !Settings.DisableBlendshapeModifier)
+                                    skinnedMesh.SetBlendShapeWeight(bIndex, weight);
                             }
                         }
                     }
@@ -584,15 +578,9 @@ namespace AdvancedPeopleSystem
                         {
                             if (skinnedMesh != null && skinnedMesh.sharedMesh != null)
                             {
-                                for (var i = 0; i < skinnedMesh.sharedMesh.blendShapeCount; i++)
-                                {
-                                    if (typeName == skinnedMesh.sharedMesh.GetBlendShapeName(i))
-                                    {
-                                        var bIndex = skinnedMesh.sharedMesh.GetBlendShapeIndex(typeName);
-                                        if(bIndex != -1 && !Settings.DisableBlendshapeModifier)
-                                            skinnedMesh.SetBlendShapeWeight(bIndex, weight);
-                                    }
-                                }
+                                var bIndex = skinnedMesh.sharedMesh.GetBlendShapeIndex(typeName);
+                                if (bIndex != -1 && !Settings.DisableBlendshapeModifier)
+                                    skinnedMesh.SetBlendShapeWeight(bIndex, weight);
                             }
                         }
                     }
